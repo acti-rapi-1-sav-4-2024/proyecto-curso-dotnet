@@ -82,4 +82,14 @@ El firmador electrónico se construirá utilizando ASP .NET Core y se desplegar�
 
 * Diagrama de la arquitectura, mostrando los componentes principales: interfaz de usuario, motor de firma, almacenamiento de claves, etc.
 
+## Referencias
+
+* [API libre para Factura Electrónica en Costa Rica](https://github.com/CRLibre/API_Hacienda).
+
+* [Hecho en Costa Rica: Hacienda CLI](https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca).
+
+* [Diagrama de flujo Factura Electrónica Costa Rica](https://raw.githubusercontent.com/CRLibre/docs-fe-hacienda-cr/master/diagrama-flujo/Diagrama%20de%20Flujo%20para%20Factura%20Electronica%20Costa%20Rica.png).
+
+* [xades-signer-cr](https://github.com/johann04/xades-signer-cr).
+
 **Al finalizar este proyecto, los estudiantes habrán adquirido una sólida base en el desarrollo de APIs RESTful para aplicaciones empresariales y estarán preparados para abordar proyectos más complejos en el ámbito de la facturación electrónica.**

@@ -74,4 +74,10 @@ Desarrollar un reverse proxy utilizando ASP.NET Core que actúe como intermediar
 
 * **Escalabilidad:** El proxy debe ser diseñado para poder escalar horizontalmente si es necesario.
 
+## Referencias
+
+* [API Ministerio de Hacienda](https://paper.dropbox.com/doc/API-Ministerio-de-Hacienda-znrOU6bGjTHcXjo8oUmBj).
+
+* [Hecho en Costa Rica: Hacienda CLI](https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca).
+
 **Al finalizar este proyecto, los estudiantes habrán adquirido habilidades prácticas en el desarrollo de proxies, la integración con APIs externas y la aplicación de los conceptos aprendidos en el curso.**

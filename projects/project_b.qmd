@@ -78,4 +78,12 @@ Desarrollar una API RESTful utilizando ASP.NET Core para gestionar la emisión d
 
 * **Performance:** La API debe ser eficiente y capaz de manejar un gran volumen de transacciones.
 
+## Referencias
+
+* [API libre para Factura Electrónica en Costa Rica](https://github.com/CRLibre/API_Hacienda).
+
+* [Hecho en Costa Rica: Hacienda CLI](https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca).
+
+* [Diagrama de flujo Factura Electrónica Costa Rica](https://raw.githubusercontent.com/CRLibre/docs-fe-hacienda-cr/master/diagrama-flujo/Diagrama%20de%20Flujo%20para%20Factura%20Electronica%20Costa%20Rica.png).
+
 **Al finalizar este proyecto, los estudiantes habrán adquirido una sólida base en el desarrollo de APIs RESTful para aplicaciones empresariales y estarán preparados para abordar proyectos más complejos en el ámbito de la facturación electrónica.**

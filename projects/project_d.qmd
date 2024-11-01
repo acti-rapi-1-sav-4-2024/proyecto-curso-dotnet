@@ -71,4 +71,12 @@ El reverse proxy se construirá utilizando ASP.NET Core y se desplegará en un a
 
 * **Monitoreo:** Implementar un sistema de monitoreo para rastrear el rendimiento del proxy y detectar problemas.
 
+## Referencias
+
+* [Building a Reverse Proxy in .NET Core](https://auth0.com/blog/building-a-reverse-proxy-in-dot-net-core/).
+
+* [Hecho en Costa Rica: Hacienda CLI](https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca).
+
+* [How to securely reverse-proxy ASP.NET Core web apps](https://dev.to/asimmon/how-to-securely-reverse-proxy-aspnet-core-web-apps-3h4c).
+
 **Al finalizar este proyecto, los estudiantes habrán adquirido habilidades prácticas en el desarrollo de proxies, la integración con APIs externas y la aplicación de los conceptos aprendidos en el curso.**
