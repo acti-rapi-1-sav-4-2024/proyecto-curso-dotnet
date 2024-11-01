@@ -41,7 +41,11 @@ A continuación, se presentan varias propuestas de proyectos para que el estudia
 
 {{< include projects/project_a.qmd >}}
 
+{{< include projects/project_b.qmd >}}
 
+{{< include projects/project_c.qmd >}}
+
+{{< include projects/project_d.qmd >}}
 
 
 This is a simple placeholder for the manuscript's main document [@knuth84].

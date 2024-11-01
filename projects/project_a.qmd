@@ -54,6 +54,8 @@ Desarrollar un reverse proxy utilizando ASP.NET Core que actúe como intermediar
 
 * Un informe que describa la arquitectura del proxy, las decisiones de diseño y los desafíos enfrentados.
 
+* Diagrama de la arquitectura, mostrando los componentes principales: proxy, servicios externos, base de datos (opcional).
+
 ## Evaluación
 
 * Corrección de la implementación del proxy.

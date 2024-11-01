@@ -1,0 +1,74 @@
+# Propuesta de proyecto C: Reverse Proxy de Otras APIs
+
+## Objetivo del Proyecto
+
+Desarrollar un reverse proxy utilizando ASP.NET Core que actúe como intermediario entre una aplicación cliente y múltiples APIs externas. Este proyecto permitirá a los estudiantes aplicar los conocimientos adquiridos en el curso para construir una solución que consolide y unifique el acceso a diferentes servicios web, mejorando la experiencia del usuario y la mantenibilidad de las aplicaciones.
+
+## Lo que aprenderán los estudiantes
+
+* **Arquitectura de microservicios:** Cómo un proxy puede servir como puerta de entrada a múltiples servicios.
+
+* **Manejo de solicitudes HTTP:** Enrutamiento, transformación y composición de solicitudes.
+
+* **Caching:** Optimización del rendimiento a través del almacenamiento en caché de respuestas.
+
+* **Resiliencia:** Manejo de errores, timeouts y reintentos.
+
+* **Seguridad:** Autenticación, autorización y protección contra ataques comunes.
+
+## Criterios de Aceptación
+
+* **Funcionalidad:**
+    * Enrutar solicitudes a diferentes APIs basadas en la ruta de la URL.
+    * Agregar encabezados y parámetros de consulta a las solicitudes.
+    * Combinar datos de múltiples APIs en una sola respuesta.
+
+* **Performance:**
+    * Implementar un mecanismo de caching para mejorar la velocidad de respuesta.
+    * Manejar grandes volúmenes de tráfico.
+
+* **Seguridad:**
+    * Proteger contra ataques como inyección SQL, XSS y CSRF.
+    * Implementar autenticación y autorización para acceder a las APIs.
+
+* **Escalabilidad:**
+    * Diseñar el proxy para que pueda escalar horizontalmente.
+
+## Descripción Detallada
+
+El reverse proxy se construirá utilizando ASP.NET Core y se desplegará en un ambiente local (no es necesario hostearlo en una nube).
+
+
+## Tecnologías sugeridas
+
+* **.NET Core:** Framework para el desarrollo del proxy.
+
+* **HttpClient:** Para realizar las solicitudes a las APIs externas.
+
+* **Redis:** Para implementar el caching (opcional).
+
+* **Swagger/OpenAPI:** Para generar la documentación de la API del proxy (opcional).
+
+## Temas a Abordar
+
+* Aplicar los conceptos básicos de HTTP para entender el funcionamiento del proxy.
+
+* Utilizar los principios de REST para diseñar los endpoints del proxy y las interacciones con las APIs externas.
+
+* Utilizar JSON para representar las respuestas de las APIs y para almacenar los datos en caché.
+
+* Implementar middleware para manejar la autenticación, el cacheo y el manejo de errores.
+
+* Diseñar una estructura de URL clara y consistente para los endpoints del proxy.
+
+* Generar una documentación completa de la API del proxy utilizando Swagger o OpenAPI.
+
+* Considerar el uso de Docker para contenerizar el proxy y facilitar su despliegue.
+
+## Aspectos adicionales a considerar
+
+* **Seguridad:** Implementar medidas de seguridad adicionales, como el cifrado de las comunicaciones y la protección contra ataques comunes.
+
+* **Monitoreo:** Implementar un sistema de monitoreo para rastrear el rendimiento del proxy y detectar problemas.
+
+**Al finalizar este proyecto, los estudiantes habrán adquirido habilidades prácticas en el desarrollo de proxies, la integración con APIs externas y la aplicación de los conceptos aprendidos en el curso.**
