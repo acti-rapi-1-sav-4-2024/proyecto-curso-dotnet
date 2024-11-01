@@ -6,3 +6,10 @@ tasks:
   default:
     cmds:
       - quarto preview --port 4321
+  delete-dry-run:
+    cmds:
+      - git clean -xdn
+  delete-all-ignored-files:
+    prompt: "Are you sure you want to delete all ignored files?"
+    cmds:
+      - git clean -Xdf
