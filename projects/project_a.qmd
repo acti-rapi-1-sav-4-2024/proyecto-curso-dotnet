@@ -1,0 +1,75 @@
+# Propuesta de proyecto A: Reverse Proxy con API de Hacienda
+
+## Objetivo
+
+Desarrollar un reverse proxy utilizando ASP.NET Core que actúe como intermediario entre una aplicación cliente y la API de Hacienda de Costa Rica. Este proyecto permitirá a los estudiantes aplicar los conocimientos adquiridos en el curso para construir una solución que mejore el rendimiento, la seguridad y la escalabilidad de las aplicaciones que interactúan con la API de Hacienda.
+
+## Requisitos Mínimos
+
+* **Configuración del proxy:** Configurar el proxy para enrutar las solicitudes a los endpoints correspondientes de la API de Hacienda.
+
+* **Cacheo de respuestas:** Implementar un mecanismo de cacheo para almacenar las respuestas más comunes de la API y mejorar el rendimiento.
+
+* **Manejo de errores:** Implementar un manejo de errores robusto para capturar y gestionar las excepciones que puedan ocurrir durante las solicitudes.
+
+* **Autenticación:** Implementar un mecanismo de autenticación para acceder a la API de Hacienda de forma segura.
+
+## Temas a Abordar
+
+* Aplicar los conceptos básicos de HTTP y desarrollo de APIs web para comprender el funcionamiento del proxy.
+
+* Utilizar los principios de REST para diseñar la arquitectura del proxy y las interacciones con la API de Hacienda.
+
+* Utilizar JSON para representar las respuestas de la API y para almacenar los datos en caché.
+
+* Implementar middleware para manejar la autenticación, el cacheo y el manejo de errores.
+
+* Diseñar una estructura de URL clara y consistente para los endpoints del proxy.
+
+* Generar una documentación completa de la API del proxy utilizando Swagger o OpenAPI.
+
+## Requisitos Adicionales (Opcionales)
+
+* **Compresión de respuestas:** Implementar la compresión de las respuestas para reducir el tamaño de los datos transmitidos.
+
+* **Seguridad:** Implementar medidas de seguridad adicionales, como el cifrado de las comunicaciones y la protección contra ataques comunes.
+
+* **Monitoreo:** Implementar un sistema de monitoreo para rastrear el rendimiento del proxy y detectar problemas.
+
+## Tecnologías Sugeridas
+
+* **.NET Core:** Framework para el desarrollo del proxy.
+
+* **HttpClient:** Para realizar las solicitudes a la API de Hacienda.
+
+* **Redis:** Para implementar el cacheo.
+
+* **Swagger/OpenAPI:** Para generar la documentación de la API del proxy.
+
+## Entrega
+
+* Código fuente del proyecto.
+
+* Documentación de la API del proxy en formato Swagger o OpenAPI.
+
+* Un informe que describa la arquitectura del proxy, las decisiones de diseño y los desafíos enfrentados.
+
+## Evaluación
+
+* Corrección de la implementación del proxy.
+
+* Eficiencia del cacheo y el manejo de errores.
+
+* Seguridad de la implementación.
+
+* Calidad del código y la documentación.
+
+## Consideraciones Adicionales
+
+* **Documentación de la API de Hacienda:** Es fundamental que los estudiantes consulten la documentación oficial de la API de Hacienda para entender los endpoints disponibles, los formatos de datos y los requisitos de autenticación.
+
+* **Performance:** Se debe prestar atención al rendimiento del proxy, especialmente en términos de tiempo de respuesta y uso de recursos.
+
+* **Escalabilidad:** El proxy debe ser diseñado para poder escalar horizontalmente si es necesario.
+
+**Al finalizar este proyecto, los estudiantes habrán adquirido habilidades prácticas en el desarrollo de proxies, la integración con APIs externas y la aplicación de los conceptos aprendidos en el curso.**

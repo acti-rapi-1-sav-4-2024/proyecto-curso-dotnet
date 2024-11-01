@@ -16,5 +16,32 @@ authors:
 bibliography: references.bib
 ---
 
-# Prpopuesta 01
+# Introducción
+A través de este proyecto, los estudiantes pondrán en práctica los conocimientos adquiridos en el curso de desarrollo de APIs RESTful con ASP.NET Core. Se creará un servicio web que servirá como punto de partida para desarrollar aplicaciones más complejas y sofisticadas.
+
+## Objetivos Básicos
+* **Crear una API RESTful básica:** Implementar los métodos HTTP fundamentales (GET, POST, PUT, DELETE) para realizar operaciones CRUD sobre un recurso sencillo (por ejemplo, una lista de tareas, una colección de usuarios).
+* **Utilizar ASP.NET Core:** Configurar un proyecto de ASP.NET Core, crear controladores, y modelar datos utilizando C#.
+* **Entender el ciclo de vida de una solicitud HTTP:** Desde que se recibe una solicitud hasta que se envía una respuesta.
+* **Implementar enrutamiento básico:** Configurar rutas para diferentes operaciones sobre los recursos.
+
+## Objetivos Intermedios
+* **Implementar validación de datos:** Asegurarse de que los datos recibidos en las solicitudes sean válidos y consistentes.
+* **Manejar errores:** Implementar mecanismos para manejar errores y devolver respuestas informativas.
+* **Utilizar un ORM:** Interactuar con una base de datos utilizando un ORM como Entity Framework Core.
+* **Implementar autenticación básica:** Proteger la API utilizando mecanismos de autenticación sencillos como Basic Authentication o token-based authentication.
+
+## Objetivos Avanzados
+* **Implementar autorización:** Controlar el acceso a los recursos de la API en función de los roles de los usuarios.
+* **Utilizar middleware:** Crear middleware personalizado para realizar tareas comunes como la autenticación, la autorización, el logging o la compresión.
+* **Implementar paginación:** Manejar grandes conjuntos de datos de forma eficiente.
+* **Utilizar Swagger o OpenAPI:** Generar documentación interactiva de la API.
+
+A continuación, se presentan varias propuestas de proyectos para que el estudiante seleccione la que más se adapte a sus intereses y objetivos de aprendizaje. Cada proyecto ofrece una oportunidad única para aplicar los conocimientos adquiridos en el curso de una manera práctica y creativa.
+
+{{< include projects/project_a.qmd >}}
+
+
+
+
 This is a simple placeholder for the manuscript's main document [@knuth84].
