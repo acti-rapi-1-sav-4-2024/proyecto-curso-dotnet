@@ -1,5 +1,8 @@
 project:
   type: manuscript
+  render:
+    - "*.qmd"
+    - "!CHANGELOG.md"
 
 manuscript:
   article: index.qmd
@@ -17,7 +20,7 @@ format:
 lang: es
 
 execute:
-  freeze: true
+  freeze: auto
 
 
 
