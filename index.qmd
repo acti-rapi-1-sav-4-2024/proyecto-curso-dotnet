@@ -1,0 +1,20 @@
+---
+title: Proyecto para el curso RESTful Web APIs con .NET Core
+authors:
+  - name: Kevin Andrés Hernández Rostrán
+    id: kahr
+    degrees: MSc CS
+    orcid: 0009-0001-7682-0350
+    email: khernandez@ucenfotec.ac.cr
+    affiliation: 
+      - name: Universidad Cenfotec
+        city: San José
+        state: San Pedro
+        country: Costa Rica
+        url: https://ucenfotec.ac.cr
+
+bibliography: references.bib
+---
+
+# Prpopuesta 01
+This is a simple placeholder for the manuscript's main document [@knuth84].
