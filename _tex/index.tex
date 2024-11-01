@@ -1,0 +1,907 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+]{agujournal2019}
+
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else  
+    % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\setcounter{secnumdepth}{5}
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{url} %this package should fix any errors with URLs in refs.
+\usepackage{lineno}
+\usepackage[inline]{trackchanges} %for better track changes. finalnew option will compile document with changes incorporated.
+\usepackage{soul}
+\linenumbers
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Tabla de contenidos}
+\else
+  \newcommand\contentsname{Tabla de contenidos}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{Listado de Figuras}
+\else
+  \newcommand\listfigurename{Listado de Figuras}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{Listado de Tablas}
+\else
+  \newcommand\listtablename{Listado de Tablas}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figura}
+\else
+  \newcommand\figurename{Figura}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Tabla}
+\else
+  \newcommand\tablename{Tabla}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listado}
+\newcommand*\listoflistings{\listof{codelisting}{Listado de Listados}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{spanish}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
+\usepackage{bookmark}
+
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Proyecto para el curso RESTful Web APIs con .NET Core},
+  pdflang={es},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+
+\draftfalse
+
+\begin{document}
+\title{Proyecto para el curso RESTful Web APIs con .NET Core}
+
+\authors{Kevin Andrés Hernández Rostrán\affil{1}}
+\affiliation{1}{Universidad Cenfotec, San José, San Pedro, Costa Rica}
+
+
+
+
+
+
+
+
+\section{Introducción}\label{introducciuxf3n}
+
+A través de este proyecto, los estudiantes pondrán en práctica los
+conocimientos adquiridos en el curso de desarrollo de APIs RESTful con
+ASP.NET Core. Se creará un servicio web que servirá como punto de
+partida para desarrollar aplicaciones más complejas y sofisticadas.
+
+\subsection{Objetivos Básicos}\label{objetivos-buxe1sicos}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Crear una API RESTful básica:} Implementar los métodos HTTP
+  fundamentales (GET, POST, PUT, DELETE) para realizar operaciones CRUD
+  sobre un recurso sencillo (por ejemplo, una lista de tareas, una
+  colección de usuarios).
+\item
+  \textbf{Utilizar ASP.NET Core:} Configurar un proyecto de ASP.NET
+  Core, crear controladores, y modelar datos utilizando C\#.
+\item
+  \textbf{Entender el ciclo de vida de una solicitud HTTP:} Desde que se
+  recibe una solicitud hasta que se envía una respuesta.
+\item
+  \textbf{Implementar enrutamiento básico:} Configurar rutas para
+  diferentes operaciones sobre los recursos.
+\end{itemize}
+
+\subsection{Objetivos Intermedios}\label{objetivos-intermedios}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Implementar validación de datos:} Asegurarse de que los datos
+  recibidos en las solicitudes sean válidos y consistentes.
+\item
+  \textbf{Manejar errores:} Implementar mecanismos para manejar errores
+  y devolver respuestas informativas.
+\item
+  \textbf{Utilizar un ORM:} Interactuar con una base de datos utilizando
+  un ORM como Entity Framework Core.
+\item
+  \textbf{Implementar autenticación básica:} Proteger la API utilizando
+  mecanismos de autenticación sencillos como Basic Authentication o
+  token-based authentication.
+\end{itemize}
+
+\subsection{Objetivos Avanzados}\label{objetivos-avanzados}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Implementar autorización:} Controlar el acceso a los recursos
+  de la API en función de los roles de los usuarios.
+\item
+  \textbf{Utilizar middleware:} Crear middleware personalizado para
+  realizar tareas comunes como la autenticación, la autorización, el
+  logging o la compresión.
+\item
+  \textbf{Implementar paginación:} Manejar grandes conjuntos de datos de
+  forma eficiente.
+\item
+  \textbf{Utilizar Swagger o OpenAPI:} Generar documentación interactiva
+  de la API.
+\end{itemize}
+
+A continuación, se presentan varias propuestas de proyectos para que el
+estudiante seleccione la que más se adapte a sus intereses y objetivos
+de aprendizaje. Cada proyecto ofrece una oportunidad única para aplicar
+los conocimientos adquiridos en el curso de una manera práctica y
+creativa.
+
+\section{Propuesta de proyecto A: Reverse Proxy con API de
+Hacienda}\label{propuesta-de-proyecto-a-reverse-proxy-con-api-de-hacienda}
+
+\subsection{Objetivo}\label{objetivo}
+
+Desarrollar un reverse proxy utilizando ASP.NET Core que actúe como
+intermediario entre una aplicación cliente y la API de Hacienda de Costa
+Rica. Este proyecto permitirá a los estudiantes aplicar los
+conocimientos adquiridos en el curso para construir una solución que
+mejore el rendimiento, la seguridad y la escalabilidad de las
+aplicaciones que interactúan con la API de Hacienda.
+
+\subsection{Requisitos Mínimos}\label{requisitos-muxednimos}
+
+\begin{itemize}
+\item
+  \textbf{Configuración del proxy:} Configurar el proxy para enrutar las
+  solicitudes a los endpoints correspondientes de la API de Hacienda.
+\item
+  \textbf{Cacheo de respuestas:} Implementar un mecanismo de cacheo para
+  almacenar las respuestas más comunes de la API y mejorar el
+  rendimiento.
+\item
+  \textbf{Manejo de errores:} Implementar un manejo de errores robusto
+  para capturar y gestionar las excepciones que puedan ocurrir durante
+  las solicitudes.
+\item
+  \textbf{Autenticación:} Implementar un mecanismo de autenticación para
+  acceder a la API de Hacienda de forma segura.
+\end{itemize}
+
+\subsection{Temas a Abordar}\label{temas-a-abordar}
+
+\begin{itemize}
+\item
+  Aplicar los conceptos básicos de HTTP y desarrollo de APIs web para
+  comprender el funcionamiento del proxy.
+\item
+  Utilizar los principios de REST para diseñar la arquitectura del proxy
+  y las interacciones con la API de Hacienda.
+\item
+  Utilizar JSON para representar las respuestas de la API y para
+  almacenar los datos en caché.
+\item
+  Implementar middleware para manejar la autenticación, el cacheo y el
+  manejo de errores.
+\item
+  Diseñar una estructura de URL clara y consistente para los endpoints
+  del proxy.
+\item
+  Generar una documentación completa de la API del proxy utilizando
+  Swagger o OpenAPI.
+\end{itemize}
+
+\subsection{Requisitos Adicionales
+(Opcionales)}\label{requisitos-adicionales-opcionales}
+
+\begin{itemize}
+\item
+  \textbf{Compresión de respuestas:} Implementar la compresión de las
+  respuestas para reducir el tamaño de los datos transmitidos.
+\item
+  \textbf{Seguridad:} Implementar medidas de seguridad adicionales, como
+  el cifrado de las comunicaciones y la protección contra ataques
+  comunes.
+\item
+  \textbf{Monitoreo:} Implementar un sistema de monitoreo para rastrear
+  el rendimiento del proxy y detectar problemas.
+\end{itemize}
+
+\subsection{Tecnologías Sugeridas}\label{tecnologuxedas-sugeridas}
+
+\begin{itemize}
+\item
+  \textbf{.NET Core:} Framework para el desarrollo del proxy.
+\item
+  \textbf{HttpClient:} Para realizar las solicitudes a la API de
+  Hacienda.
+\item
+  \textbf{Redis:} Para implementar el cacheo.
+\item
+  \textbf{Swagger/OpenAPI:} Para generar la documentación de la API del
+  proxy.
+\end{itemize}
+
+\subsection{Entrega}\label{entrega}
+
+\begin{itemize}
+\item
+  Código fuente del proyecto.
+\item
+  Documentación de la API del proxy en formato Swagger o OpenAPI.
+\item
+  Un informe que describa la arquitectura del proxy, las decisiones de
+  diseño y los desafíos enfrentados.
+\item
+  Diagrama de la arquitectura, mostrando los componentes principales:
+  proxy, servicios externos, base de datos (opcional).
+\end{itemize}
+
+\subsection{Evaluación}\label{evaluaciuxf3n}
+
+\begin{itemize}
+\item
+  Corrección de la implementación del proxy.
+\item
+  Eficiencia del cacheo y el manejo de errores.
+\item
+  Seguridad de la implementación.
+\item
+  Calidad del código y la documentación.
+\end{itemize}
+
+\subsection{Consideraciones
+Adicionales}\label{consideraciones-adicionales}
+
+\begin{itemize}
+\item
+  \textbf{Documentación de la API de Hacienda:} Es fundamental que los
+  estudiantes consulten la documentación oficial de la API de Hacienda
+  para entender los endpoints disponibles, los formatos de datos y los
+  requisitos de autenticación.
+\item
+  \textbf{Performance:} Se debe prestar atención al rendimiento del
+  proxy, especialmente en términos de tiempo de respuesta y uso de
+  recursos.
+\item
+  \textbf{Escalabilidad:} El proxy debe ser diseñado para poder escalar
+  horizontalmente si es necesario.
+\end{itemize}
+
+\subsection{Referencias}\label{referencias}
+
+\begin{itemize}
+\item
+  \href{https://paper.dropbox.com/doc/API-Ministerio-de-Hacienda-znrOU6bGjTHcXjo8oUmBj}{API
+  Ministerio de Hacienda}.
+\item
+  \href{https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca}{Hecho
+  en Costa Rica: Hacienda CLI}.
+\end{itemize}
+
+\textbf{Al finalizar este proyecto, los estudiantes habrán adquirido
+habilidades prácticas en el desarrollo de proxies, la integración con
+APIs externas y la aplicación de los conceptos aprendidos en el curso.}
+
+\section{Propuesta de proyecto B: API para Factura
+Electrónica}\label{propuesta-de-proyecto-b-api-para-factura-electruxf3nica}
+
+\subsection{Objetivo}\label{objetivo-1}
+
+Desarrollar una API RESTful utilizando ASP.NET Core para gestionar la
+emisión de facturas electrónicas. Esta API permitirá a las empresas
+generar, consultar y cancelar facturas electrónicas de acuerdo con los
+estándares establecidos por el Ministerio de Hacienda de Costa Rica. El
+proyecto permitirá a los estudiantes aplicar los conocimientos
+adquiridos en el curso para construir una solución que automatice y
+optimice los procesos de facturación electrónica.
+
+\subsection{Requisitos Mínimos}\label{requisitos-muxednimos-1}
+
+\begin{itemize}
+\item
+  \textbf{Modelos de datos:} Definir modelos para representar facturas
+  (número, fecha de emisión, cliente, productos, impuestos), clientes,
+  productos y otros elementos relevantes.
+\item
+  \textbf{Endpoints:} Implementar endpoints RESTful para las siguientes
+  operaciones:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \textbf{Facturas:} Crear, leer, actualizar, cancelar facturas.
+  \item
+    \textbf{Clientes:} Crear, leer, actualizar, eliminar clientes.
+  \item
+    \textbf{Productos:} Crear, leer, actualizar, eliminar productos.
+  \item
+    \textbf{Generación de XML:} Generar el archivo XML de la factura con
+    el formato requerido por el Ministerio de Hacienda.
+  \item
+    \textbf{Firma digital:} Implementar la firma digital de la factura
+    utilizando un certificado digital.
+  \item
+    \textbf{Envío al Ministerio de Hacienda:} Enviar la factura firmada
+    al sistema del Ministerio de Hacienda.
+  \end{itemize}
+\item
+  \textbf{Validación de datos:} Implementar una rigurosa validación de
+  los datos de entrada para asegurar la integridad de las facturas.
+\item
+  \textbf{Manejo de errores:} Implementar un mecanismo de manejo de
+  errores personalizado para devolver mensajes de error claros y
+  concisos.
+\item
+  \textbf{Documentación:} Generar documentación de la API utilizando
+  herramientas como Swagger o OpenAPI.
+\end{itemize}
+
+\subsection{Temas a Abordar}\label{temas-a-abordar-1}
+
+\begin{itemize}
+\tightlist
+\item
+  Aplicar los conceptos básicos de HTTP y desarrollo de APIs web para
+  diseñar la arquitectura de la API.
+\item
+  Utilizar los principios de REST para diseñar los endpoints y las
+  respuestas de la API.
+\item
+  Utilizar JSON para representar los datos y definir los formatos de
+  respuesta.
+\item
+  Implementar middleware para tareas como la validación de datos, la
+  autenticación, la autorización y el manejo de excepciones.
+\item
+  Diseñar una estructura de URL clara y consistente para los endpoints.
+\item
+  Generar una documentación completa de la API utilizando Swagger o
+  OpenAPI.
+\item
+  Implementar un mecanismo de autenticación para proteger el acceso a la
+  API.
+\end{itemize}
+
+\subsection{Requisitos Adicionales
+(Opcionales)}\label{requisitos-adicionales-opcionales-1}
+
+\begin{itemize}
+\item
+  \textbf{Generación de reportes:} Generar reportes de ventas y otros
+  informes a partir de los datos de las facturas.
+\item
+  \textbf{Notificaciones:} Enviar notificaciones por correo electrónico
+  o SMS cuando se emiten o cancelan facturas.
+\end{itemize}
+
+\subsection{Tecnologías Sugeridas}\label{tecnologuxedas-sugeridas-1}
+
+\begin{itemize}
+\item
+  \textbf{.NET Core:} Framework para el desarrollo de aplicaciones web.
+\item
+  \textbf{Entity Framework Core:} ORM para interactuar con la base de
+  datos.
+\item
+  \textbf{Swagger/OpenAPI:} Para generar la documentación de la API.
+\item
+  \textbf{Librería de firma digital:} Para firmar los archivos XML de
+  las facturas.
+\item
+  \textbf{Biblioteca para consumir la API del Ministerio de Hacienda:}
+  Para enviar las facturas al sistema del Ministerio.
+\end{itemize}
+
+\subsection{Entrega}\label{entrega-1}
+
+\begin{itemize}
+\item
+  Código fuente del proyecto.
+\item
+  Documentación de la API en formato Swagger o OpenAPI.
+\item
+  Un documento explicativo que describa las decisiones de diseño y las
+  tecnologías utilizadas.
+\item
+  Diagrama de la arquitectura, mostrando los componentes principales:
+  api, servicios externos, base de datos (opcional).
+\end{itemize}
+
+\subsection{Evaluación}\label{evaluaciuxf3n-1}
+
+\begin{itemize}
+\item
+  Corrección de la implementación de los endpoints.
+\item
+  Calidad del código (legibilidad, mantenibilidad).
+\item
+  Completitud de la documentación.
+\item
+  Cumplimiento de los requisitos adicionales.
+\item
+  Cumplimiento de los estándares de facturación electrónica del
+  Ministerio de Hacienda.
+\end{itemize}
+
+\subsection{Consideraciones
+Adicionales}\label{consideraciones-adicionales-1}
+
+\begin{itemize}
+\item
+  \textbf{Legislación:} Es fundamental que los estudiantes se aseguren
+  de cumplir con toda la legislación vigente en materia de facturación
+  electrónica.
+\item
+  \textbf{Seguridad:} Se deben implementar medidas de seguridad robustas
+  para proteger la información confidencial de los clientes y de la
+  empresa.
+\item
+  \textbf{Performance:} La API debe ser eficiente y capaz de manejar un
+  gran volumen de transacciones.
+\end{itemize}
+
+\subsection{Referencias}\label{referencias-1}
+
+\begin{itemize}
+\item
+  \href{https://github.com/CRLibre/API_Hacienda}{API libre para Factura
+  Electrónica en Costa Rica}.
+\item
+  \href{https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca}{Hecho
+  en Costa Rica: Hacienda CLI}.
+\item
+  \href{https://raw.githubusercontent.com/CRLibre/docs-fe-hacienda-cr/master/diagrama-flujo/Diagrama\%20de\%20Flujo\%20para\%20Factura\%20Electronica\%20Costa\%20Rica.png}{Diagrama
+  de flujo Factura Electrónica Costa Rica}.
+\end{itemize}
+
+\textbf{Al finalizar este proyecto, los estudiantes habrán adquirido una
+sólida base en el desarrollo de APIs RESTful para aplicaciones
+empresariales y estarán preparados para abordar proyectos más complejos
+en el ámbito de la facturación electrónica.}
+
+\section{Propuesta de proyecto C: Firmador
+Electrónico}\label{propuesta-de-proyecto-c-firmador-electruxf3nico}
+
+\subsection{Objetivo del Proyecto}\label{objetivo-del-proyecto}
+
+Desarrollar una aplicación que permita firmar digitalmente documentos
+electrónicos de forma segura y confiable. El firmador electrónico
+garantizará la autenticidad, integridad y no repudio de los documentos
+firmados.
+
+\subsection{Lo que aprenderán los
+estudiantes}\label{lo-que-aprenderuxe1n-los-estudiantes}
+
+\begin{itemize}
+\item
+  \textbf{Criptografía:} Algoritmos de firma digital (RSA, DSA),
+  generación de claves, certificados digitales.
+\item
+  \textbf{Seguridad de la información:} Protección de claves privadas,
+  prevención de ataques.
+\item
+  \textbf{Desarrollo de aplicaciones:} Creación de interfaces de usuario
+  intuitivas, manejo de archivos.
+\item
+  \textbf{Legislación:} Normativa relacionada con la firma electrónica.
+\end{itemize}
+
+\subsection{Criterios de Aceptación}\label{criterios-de-aceptaciuxf3n}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Funcionalidad:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Firmar digitalmente diferentes tipos de archivos (XML, etc.).
+  \item
+    Verificar la integridad de una firma digital.
+  \item
+    Generar certificados digitales (opcional).
+  \end{itemize}
+\item
+  \textbf{Seguridad:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Almacenar las claves privadas de forma segura.
+  \item
+    Proteger contra ataques como la falsificación de firmas.
+  \item
+    Cumplir con los estándares de firma digital.
+  \end{itemize}
+\item
+  \textbf{Usabilidad:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Interfaz de usuario intuitiva y fácil de usar.
+  \end{itemize}
+\item
+  \textbf{Integración:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Posibilidad de integrarse con otros sistemas (opcional).
+  \end{itemize}
+\end{itemize}
+
+\subsection{Descripción Detallada}\label{descripciuxf3n-detallada}
+
+El firmador electrónico se construirá utilizando ASP .NET Core y se
+desplegará en un ambiente local (no es necesario hostearlo en una nube).
+
+\subsection{Retos y consideraciones}\label{retos-y-consideraciones}
+
+\begin{itemize}
+\item
+  \textbf{Seguridad:} La seguridad de las claves privadas es
+  fundamental.
+\item
+  \textbf{Legislación:} Es necesario cumplir con la legislación vigente
+  en materia de firma electrónica.
+\item
+  \textbf{Interoperabilidad:} El firmador debe ser compatible con
+  diferentes formatos de archivo y sistemas operativos.
+\end{itemize}
+
+\subsection{Temas a Abordar}\label{temas-a-abordar-2}
+
+\begin{itemize}
+\item
+  Aplicar los conceptos básicos de HTTP para entender la comunicación
+  entre el cliente y el servidor.
+\item
+  Utilizar los principios de REST para diseñar una API que permita
+  firmar documentos de forma remota (opcional).
+\item
+  Utilizar JSON para representar los datos de la firma y los metadatos
+  del documento.
+\item
+  Implementar middleware para manejar la autenticación, la autorización
+  y el manejo de excepciones.
+\item
+  Diseñar una estructura de URL clara y consistente para los endpoints
+  de la API (opcional).
+\item
+  Generar una documentación completa de la API utilizando Swagger o
+  OpenAPI (opcional).
+\item
+  Implementar un mecanismo de autenticación robusto para proteger el
+  acceso a las funcionalidades de firma.
+\item
+  Realizar pruebas exhaustivas para garantizar la seguridad y la
+  funcionalidad del firmador.
+\end{itemize}
+
+\subsection{Aspectos adicionales a
+considerar}\label{aspectos-adicionales-a-considerar}
+
+\begin{itemize}
+\item
+  \textbf{Tipos de firma:} Firma simple, firma cualificada, firma
+  avanzada.
+\item
+  \textbf{Integración con sistemas de gestión documental:} Para
+  automatizar procesos de firma.
+\item
+  \textbf{Firma remota:} Permitir la firma de documentos de forma
+  remota.
+\end{itemize}
+
+\subsection{Entrega}\label{entrega-2}
+
+\begin{itemize}
+\item
+  Código fuente del proyecto.
+\item
+  Documentación de la API en formato Swagger o OpenAPI.
+\item
+  Un documento explicativo que describa las decisiones de diseño y las
+  tecnologías utilizadas.
+\item
+  Diagrama de la arquitectura, mostrando los componentes principales:
+  interfaz de usuario, motor de firma, almacenamiento de claves, etc.
+\end{itemize}
+
+\subsection{Referencias}\label{referencias-2}
+
+\begin{itemize}
+\item
+  \href{https://github.com/CRLibre/API_Hacienda}{API libre para Factura
+  Electrónica en Costa Rica}.
+\item
+  \href{https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca}{Hecho
+  en Costa Rica: Hacienda CLI}.
+\item
+  \href{https://raw.githubusercontent.com/CRLibre/docs-fe-hacienda-cr/master/diagrama-flujo/Diagrama\%20de\%20Flujo\%20para\%20Factura\%20Electronica\%20Costa\%20Rica.png}{Diagrama
+  de flujo Factura Electrónica Costa Rica}.
+\item
+  \href{https://github.com/johann04/xades-signer-cr}{xades-signer-cr}.
+\end{itemize}
+
+\textbf{Al finalizar este proyecto, los estudiantes habrán adquirido una
+sólida base en el desarrollo de APIs RESTful para aplicaciones
+empresariales y estarán preparados para abordar proyectos más complejos
+en el ámbito de la facturación electrónica.}
+
+\section{Propuesta de proyecto C: Reverse Proxy de Otras
+APIs}\label{propuesta-de-proyecto-c-reverse-proxy-de-otras-apis}
+
+\subsection{Objetivo del Proyecto}\label{objetivo-del-proyecto-1}
+
+Desarrollar un reverse proxy utilizando ASP.NET Core que actúe como
+intermediario entre una aplicación cliente y múltiples APIs externas.
+Este proyecto permitirá a los estudiantes aplicar los conocimientos
+adquiridos en el curso para construir una solución que consolide y
+unifique el acceso a diferentes servicios web, mejorando la experiencia
+del usuario y la mantenibilidad de las aplicaciones.
+
+\subsection{Lo que aprenderán los
+estudiantes}\label{lo-que-aprenderuxe1n-los-estudiantes-1}
+
+\begin{itemize}
+\item
+  \textbf{Arquitectura de microservicios:} Cómo un proxy puede servir
+  como puerta de entrada a múltiples servicios.
+\item
+  \textbf{Manejo de solicitudes HTTP:} Enrutamiento, transformación y
+  composición de solicitudes.
+\item
+  \textbf{Caching:} Optimización del rendimiento a través del
+  almacenamiento en caché de respuestas.
+\item
+  \textbf{Resiliencia:} Manejo de errores, timeouts y reintentos.
+\item
+  \textbf{Seguridad:} Autenticación, autorización y protección contra
+  ataques comunes.
+\end{itemize}
+
+\subsection{Criterios de Aceptación}\label{criterios-de-aceptaciuxf3n-1}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Funcionalidad:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Enrutar solicitudes a diferentes APIs basadas en la ruta de la URL.
+  \item
+    Agregar encabezados y parámetros de consulta a las solicitudes.
+  \item
+    Combinar datos de múltiples APIs en una sola respuesta.
+  \end{itemize}
+\item
+  \textbf{Performance:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Implementar un mecanismo de caching para mejorar la velocidad de
+    respuesta.
+  \item
+    Manejar grandes volúmenes de tráfico.
+  \end{itemize}
+\item
+  \textbf{Seguridad:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Proteger contra ataques como inyección SQL, XSS y CSRF.
+  \item
+    Implementar autenticación y autorización para acceder a las APIs.
+  \end{itemize}
+\item
+  \textbf{Escalabilidad:}
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Diseñar el proxy para que pueda escalar horizontalmente.
+  \end{itemize}
+\end{itemize}
+
+\subsection{Descripción Detallada}\label{descripciuxf3n-detallada-1}
+
+El reverse proxy se construirá utilizando ASP.NET Core y se desplegará
+en un ambiente local (no es necesario hostearlo en una nube).
+
+\subsection{Tecnologías sugeridas}\label{tecnologuxedas-sugeridas-2}
+
+\begin{itemize}
+\item
+  \textbf{.NET Core:} Framework para el desarrollo del proxy.
+\item
+  \textbf{HttpClient:} Para realizar las solicitudes a las APIs
+  externas.
+\item
+  \textbf{Redis:} Para implementar el caching (opcional).
+\item
+  \textbf{Swagger/OpenAPI:} Para generar la documentación de la API del
+  proxy (opcional).
+\end{itemize}
+
+\subsection{Temas a Abordar}\label{temas-a-abordar-3}
+
+\begin{itemize}
+\item
+  Aplicar los conceptos básicos de HTTP para entender el funcionamiento
+  del proxy.
+\item
+  Utilizar los principios de REST para diseñar los endpoints del proxy y
+  las interacciones con las APIs externas.
+\item
+  Utilizar JSON para representar las respuestas de las APIs y para
+  almacenar los datos en caché.
+\item
+  Implementar middleware para manejar la autenticación, el cacheo y el
+  manejo de errores.
+\item
+  Diseñar una estructura de URL clara y consistente para los endpoints
+  del proxy.
+\item
+  Generar una documentación completa de la API del proxy utilizando
+  Swagger o OpenAPI.
+\item
+  Considerar el uso de Docker para contenerizar el proxy y facilitar su
+  despliegue.
+\end{itemize}
+
+\subsection{Aspectos adicionales a
+considerar}\label{aspectos-adicionales-a-considerar-1}
+
+\begin{itemize}
+\item
+  \textbf{Seguridad:} Implementar medidas de seguridad adicionales, como
+  el cifrado de las comunicaciones y la protección contra ataques
+  comunes.
+\item
+  \textbf{Monitoreo:} Implementar un sistema de monitoreo para rastrear
+  el rendimiento del proxy y detectar problemas.
+\end{itemize}
+
+\subsection{Referencias}\label{referencias-3}
+
+\begin{itemize}
+\item
+  \href{https://auth0.com/blog/building-a-reverse-proxy-in-dot-net-core/}{Building
+  a Reverse Proxy in .NET Core}.
+\item
+  \href{https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca}{Hecho
+  en Costa Rica: Hacienda CLI}.
+\item
+  \href{https://dev.to/asimmon/how-to-securely-reverse-proxy-aspnet-core-web-apps-3h4c}{How
+  to securely reverse-proxy ASP.NET Core web apps}.
+\end{itemize}
+
+\textbf{Al finalizar este proyecto, los estudiantes habrán adquirido
+habilidades prácticas en el desarrollo de proxies, la integración con
+APIs externas y la aplicación de los conceptos aprendidos en el curso.}
+
+
+
+
+\end{document}

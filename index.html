@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es" xml:lang="es"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Proyecto para el curso RESTful Web APIs con .NET Core</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2486e1f0a3ee9ee1fc393803a1361cdb.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-bba601d2e4152bc38262056ee7a0d92f.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script async="" src="https://hypothes.is/embed.js"></script>
+<script>
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    document.body.classList.add('hypothesis-enabled');
+  });
+</script>
+
+
+<meta name="citation_title" content="Proyecto para el curso RESTful Web APIs con .NET Core">
+<meta name="citation_author" content="Kevin Andrés Hernández Rostrán">
+<meta name="citation_language" content="es">
+</head>
+
+<body>
+
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Proyecto para el curso RESTful Web APIs con .NET Core</h1>
+          </div>
+
+    
+    <div class="quarto-title-meta-container">
+      <div class="quarto-title-meta-column-start">
+            <div class="quarto-title-meta-author">
+          <div class="quarto-title-meta-heading">Autor/a</div>
+          <div class="quarto-title-meta-heading">Afiliación</div>
+          
+                <div class="quarto-title-meta-contents">
+            <p class="author">Kevin Andrés Hernández Rostrán, MSc CS <a href="mailto:khernandez@ucenfotec.ac.cr" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> <a href="https://orcid.org/0009-0001-7682-0350" class="quarto-title-author-orcid"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg=="></a></p>
+          </div>
+                <div class="quarto-title-meta-contents">
+                    <p class="affiliation">
+                        <a href="https://ucenfotec.ac.cr">
+                        Universidad Cenfotec
+                        </a>
+                      </p>
+                  </div>
+                    </div>
+        
+        <div class="quarto-title-meta">
+
+                      
+          
+                
+              </div>
+      </div>
+      <div class="quarto-title-meta-column-end quarto-other-formats-target">
+      <div class="quarto-alternate-formats"><div class="quarto-title-meta-heading">Otros formatos</div><div class="quarto-title-meta-contents"><p><a href="index.pdf"><i class="bi bi-file-pdf"></i>PDF (agu)</a></p></div></div></div>
+    </div>
+
+
+
+    <div class="quarto-other-links-text-target">
+    <div class="quarto-other-links"><div class="quarto-title-meta-heading">Otros Enlaces</div><div class="quarto-title-meta-contents"><span><a href="https://github.com/acti-rapi-1-sav-4-2024/proyecto-curso-dotnet"><i class="bi bi-link-45deg"></i>GitHub Repo</a></span></div></div></div>  </div>
+</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Tabla de contenidos</h2>
+   
+  <ul>
+  <li><a href="#introducción" id="toc-introducción" class="nav-link active" data-scroll-target="#introducción">Introducción</a>
+  <ul class="collapse">
+  <li><a href="#objetivos-básicos" id="toc-objetivos-básicos" class="nav-link" data-scroll-target="#objetivos-básicos">Objetivos Básicos</a></li>
+  <li><a href="#objetivos-intermedios" id="toc-objetivos-intermedios" class="nav-link" data-scroll-target="#objetivos-intermedios">Objetivos Intermedios</a></li>
+  <li><a href="#objetivos-avanzados" id="toc-objetivos-avanzados" class="nav-link" data-scroll-target="#objetivos-avanzados">Objetivos Avanzados</a></li>
+  </ul></li>
+  <li><a href="#propuesta-de-proyecto-a-reverse-proxy-con-api-de-hacienda" id="toc-propuesta-de-proyecto-a-reverse-proxy-con-api-de-hacienda" class="nav-link" data-scroll-target="#propuesta-de-proyecto-a-reverse-proxy-con-api-de-hacienda">Propuesta de proyecto A: Reverse Proxy con API de Hacienda</a>
+  <ul class="collapse">
+  <li><a href="#objetivo" id="toc-objetivo" class="nav-link" data-scroll-target="#objetivo">Objetivo</a></li>
+  <li><a href="#requisitos-mínimos" id="toc-requisitos-mínimos" class="nav-link" data-scroll-target="#requisitos-mínimos">Requisitos Mínimos</a></li>
+  <li><a href="#temas-a-abordar" id="toc-temas-a-abordar" class="nav-link" data-scroll-target="#temas-a-abordar">Temas a Abordar</a></li>
+  <li><a href="#requisitos-adicionales-opcionales" id="toc-requisitos-adicionales-opcionales" class="nav-link" data-scroll-target="#requisitos-adicionales-opcionales">Requisitos Adicionales (Opcionales)</a></li>
+  <li><a href="#tecnologías-sugeridas" id="toc-tecnologías-sugeridas" class="nav-link" data-scroll-target="#tecnologías-sugeridas">Tecnologías Sugeridas</a></li>
+  <li><a href="#entrega" id="toc-entrega" class="nav-link" data-scroll-target="#entrega">Entrega</a></li>
+  <li><a href="#evaluación" id="toc-evaluación" class="nav-link" data-scroll-target="#evaluación">Evaluación</a></li>
+  <li><a href="#consideraciones-adicionales" id="toc-consideraciones-adicionales" class="nav-link" data-scroll-target="#consideraciones-adicionales">Consideraciones Adicionales</a></li>
+  <li><a href="#referencias" id="toc-referencias" class="nav-link" data-scroll-target="#referencias">Referencias</a></li>
+  </ul></li>
+  <li><a href="#propuesta-de-proyecto-b-api-para-factura-electrónica" id="toc-propuesta-de-proyecto-b-api-para-factura-electrónica" class="nav-link" data-scroll-target="#propuesta-de-proyecto-b-api-para-factura-electrónica">Propuesta de proyecto B: API para Factura Electrónica</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-1" id="toc-objetivo-1" class="nav-link" data-scroll-target="#objetivo-1">Objetivo</a></li>
+  <li><a href="#requisitos-mínimos-1" id="toc-requisitos-mínimos-1" class="nav-link" data-scroll-target="#requisitos-mínimos-1">Requisitos Mínimos</a></li>
+  <li><a href="#temas-a-abordar-1" id="toc-temas-a-abordar-1" class="nav-link" data-scroll-target="#temas-a-abordar-1">Temas a Abordar</a></li>
+  <li><a href="#requisitos-adicionales-opcionales-1" id="toc-requisitos-adicionales-opcionales-1" class="nav-link" data-scroll-target="#requisitos-adicionales-opcionales-1">Requisitos Adicionales (Opcionales)</a></li>
+  <li><a href="#tecnologías-sugeridas-1" id="toc-tecnologías-sugeridas-1" class="nav-link" data-scroll-target="#tecnologías-sugeridas-1">Tecnologías Sugeridas</a></li>
+  <li><a href="#entrega-1" id="toc-entrega-1" class="nav-link" data-scroll-target="#entrega-1">Entrega</a></li>
+  <li><a href="#evaluación-1" id="toc-evaluación-1" class="nav-link" data-scroll-target="#evaluación-1">Evaluación</a></li>
+  <li><a href="#consideraciones-adicionales-1" id="toc-consideraciones-adicionales-1" class="nav-link" data-scroll-target="#consideraciones-adicionales-1">Consideraciones Adicionales</a></li>
+  <li><a href="#referencias-1" id="toc-referencias-1" class="nav-link" data-scroll-target="#referencias-1">Referencias</a></li>
+  </ul></li>
+  <li><a href="#propuesta-de-proyecto-c-firmador-electrónico" id="toc-propuesta-de-proyecto-c-firmador-electrónico" class="nav-link" data-scroll-target="#propuesta-de-proyecto-c-firmador-electrónico">Propuesta de proyecto C: Firmador Electrónico</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-del-proyecto" id="toc-objetivo-del-proyecto" class="nav-link" data-scroll-target="#objetivo-del-proyecto">Objetivo del Proyecto</a></li>
+  <li><a href="#lo-que-aprenderán-los-estudiantes" id="toc-lo-que-aprenderán-los-estudiantes" class="nav-link" data-scroll-target="#lo-que-aprenderán-los-estudiantes">Lo que aprenderán los estudiantes</a></li>
+  <li><a href="#criterios-de-aceptación" id="toc-criterios-de-aceptación" class="nav-link" data-scroll-target="#criterios-de-aceptación">Criterios de Aceptación</a></li>
+  <li><a href="#descripción-detallada" id="toc-descripción-detallada" class="nav-link" data-scroll-target="#descripción-detallada">Descripción Detallada</a></li>
+  <li><a href="#retos-y-consideraciones" id="toc-retos-y-consideraciones" class="nav-link" data-scroll-target="#retos-y-consideraciones">Retos y consideraciones</a></li>
+  <li><a href="#temas-a-abordar-2" id="toc-temas-a-abordar-2" class="nav-link" data-scroll-target="#temas-a-abordar-2">Temas a Abordar</a></li>
+  <li><a href="#aspectos-adicionales-a-considerar" id="toc-aspectos-adicionales-a-considerar" class="nav-link" data-scroll-target="#aspectos-adicionales-a-considerar">Aspectos adicionales a considerar</a></li>
+  <li><a href="#entrega-2" id="toc-entrega-2" class="nav-link" data-scroll-target="#entrega-2">Entrega</a></li>
+  <li><a href="#referencias-2" id="toc-referencias-2" class="nav-link" data-scroll-target="#referencias-2">Referencias</a></li>
+  </ul></li>
+  <li><a href="#propuesta-de-proyecto-c-reverse-proxy-de-otras-apis" id="toc-propuesta-de-proyecto-c-reverse-proxy-de-otras-apis" class="nav-link" data-scroll-target="#propuesta-de-proyecto-c-reverse-proxy-de-otras-apis">Propuesta de proyecto C: Reverse Proxy de Otras APIs</a>
+  <ul class="collapse">
+  <li><a href="#objetivo-del-proyecto-1" id="toc-objetivo-del-proyecto-1" class="nav-link" data-scroll-target="#objetivo-del-proyecto-1">Objetivo del Proyecto</a></li>
+  <li><a href="#lo-que-aprenderán-los-estudiantes-1" id="toc-lo-que-aprenderán-los-estudiantes-1" class="nav-link" data-scroll-target="#lo-que-aprenderán-los-estudiantes-1">Lo que aprenderán los estudiantes</a></li>
+  <li><a href="#criterios-de-aceptación-1" id="toc-criterios-de-aceptación-1" class="nav-link" data-scroll-target="#criterios-de-aceptación-1">Criterios de Aceptación</a></li>
+  <li><a href="#descripción-detallada-1" id="toc-descripción-detallada-1" class="nav-link" data-scroll-target="#descripción-detallada-1">Descripción Detallada</a></li>
+  <li><a href="#tecnologías-sugeridas-2" id="toc-tecnologías-sugeridas-2" class="nav-link" data-scroll-target="#tecnologías-sugeridas-2">Tecnologías sugeridas</a></li>
+  <li><a href="#temas-a-abordar-3" id="toc-temas-a-abordar-3" class="nav-link" data-scroll-target="#temas-a-abordar-3">Temas a Abordar</a></li>
+  <li><a href="#aspectos-adicionales-a-considerar-1" id="toc-aspectos-adicionales-a-considerar-1" class="nav-link" data-scroll-target="#aspectos-adicionales-a-considerar-1">Aspectos adicionales a considerar</a></li>
+  <li><a href="#referencias-3" id="toc-referencias-3" class="nav-link" data-scroll-target="#referencias-3">Referencias</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-notebooks"><h2>Notebooks</h2><ul><li><a href="projects/project_a-preview.html"><i class="bi bi-journal-code"></i>Propuesta de proyecto A: Reverse Proxy con API de Hacienda</a></li><li><a href="projects/project_b-preview.html"><i class="bi bi-journal-code"></i>Propuesta de proyecto B: API para Factura Electrónica</a></li><li><a href="projects/project_c-preview.html"><i class="bi bi-journal-code"></i>Propuesta de proyecto C: Firmador Electrónico</a></li><li><a href="projects/project_d-preview.html"><i class="bi bi-journal-code"></i>Propuesta de proyecto C: Reverse Proxy de Otras APIs</a></li></ul></div></nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+  
+
+
+<section id="introducción" class="level1">
+<h1>Introducción</h1>
+<p>A través de este proyecto, los estudiantes pondrán en práctica los conocimientos adquiridos en el curso de desarrollo de APIs RESTful con ASP.NET Core. Se creará un servicio web que servirá como punto de partida para desarrollar aplicaciones más complejas y sofisticadas.</p>
+<section id="objetivos-básicos" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-básicos">Objetivos Básicos</h2>
+<ul>
+<li><strong>Crear una API RESTful básica:</strong> Implementar los métodos HTTP fundamentales (GET, POST, PUT, DELETE) para realizar operaciones CRUD sobre un recurso sencillo (por ejemplo, una lista de tareas, una colección de usuarios).</li>
+<li><strong>Utilizar ASP.NET Core:</strong> Configurar un proyecto de ASP.NET Core, crear controladores, y modelar datos utilizando C#.</li>
+<li><strong>Entender el ciclo de vida de una solicitud HTTP:</strong> Desde que se recibe una solicitud hasta que se envía una respuesta.</li>
+<li><strong>Implementar enrutamiento básico:</strong> Configurar rutas para diferentes operaciones sobre los recursos.</li>
+</ul>
+</section>
+<section id="objetivos-intermedios" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-intermedios">Objetivos Intermedios</h2>
+<ul>
+<li><strong>Implementar validación de datos:</strong> Asegurarse de que los datos recibidos en las solicitudes sean válidos y consistentes.</li>
+<li><strong>Manejar errores:</strong> Implementar mecanismos para manejar errores y devolver respuestas informativas.</li>
+<li><strong>Utilizar un ORM:</strong> Interactuar con una base de datos utilizando un ORM como Entity Framework Core.</li>
+<li><strong>Implementar autenticación básica:</strong> Proteger la API utilizando mecanismos de autenticación sencillos como Basic Authentication o token-based authentication.</li>
+</ul>
+</section>
+<section id="objetivos-avanzados" class="level2">
+<h2 class="anchored" data-anchor-id="objetivos-avanzados">Objetivos Avanzados</h2>
+<ul>
+<li><strong>Implementar autorización:</strong> Controlar el acceso a los recursos de la API en función de los roles de los usuarios.</li>
+<li><strong>Utilizar middleware:</strong> Crear middleware personalizado para realizar tareas comunes como la autenticación, la autorización, el logging o la compresión.</li>
+<li><strong>Implementar paginación:</strong> Manejar grandes conjuntos de datos de forma eficiente.</li>
+<li><strong>Utilizar Swagger o OpenAPI:</strong> Generar documentación interactiva de la API.</li>
+</ul>
+<p>A continuación, se presentan varias propuestas de proyectos para que el estudiante seleccione la que más se adapte a sus intereses y objetivos de aprendizaje. Cada proyecto ofrece una oportunidad única para aplicar los conocimientos adquiridos en el curso de una manera práctica y creativa.</p>
+</section>
+</section>
+<section id="propuesta-de-proyecto-a-reverse-proxy-con-api-de-hacienda" class="level1">
+<h1>Propuesta de proyecto A: Reverse Proxy con API de Hacienda</h1>
+<section id="objetivo" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo">Objetivo</h2>
+<p>Desarrollar un reverse proxy utilizando ASP.NET Core que actúe como intermediario entre una aplicación cliente y la API de Hacienda de Costa Rica. Este proyecto permitirá a los estudiantes aplicar los conocimientos adquiridos en el curso para construir una solución que mejore el rendimiento, la seguridad y la escalabilidad de las aplicaciones que interactúan con la API de Hacienda.</p>
+</section>
+<section id="requisitos-mínimos" class="level2">
+<h2 class="anchored" data-anchor-id="requisitos-mínimos">Requisitos Mínimos</h2>
+<ul>
+<li><p><strong>Configuración del proxy:</strong> Configurar el proxy para enrutar las solicitudes a los endpoints correspondientes de la API de Hacienda.</p></li>
+<li><p><strong>Cacheo de respuestas:</strong> Implementar un mecanismo de cacheo para almacenar las respuestas más comunes de la API y mejorar el rendimiento.</p></li>
+<li><p><strong>Manejo de errores:</strong> Implementar un manejo de errores robusto para capturar y gestionar las excepciones que puedan ocurrir durante las solicitudes.</p></li>
+<li><p><strong>Autenticación:</strong> Implementar un mecanismo de autenticación para acceder a la API de Hacienda de forma segura.</p></li>
+</ul>
+</section>
+<section id="temas-a-abordar" class="level2">
+<h2 class="anchored" data-anchor-id="temas-a-abordar">Temas a Abordar</h2>
+<ul>
+<li><p>Aplicar los conceptos básicos de HTTP y desarrollo de APIs web para comprender el funcionamiento del proxy.</p></li>
+<li><p>Utilizar los principios de REST para diseñar la arquitectura del proxy y las interacciones con la API de Hacienda.</p></li>
+<li><p>Utilizar JSON para representar las respuestas de la API y para almacenar los datos en caché.</p></li>
+<li><p>Implementar middleware para manejar la autenticación, el cacheo y el manejo de errores.</p></li>
+<li><p>Diseñar una estructura de URL clara y consistente para los endpoints del proxy.</p></li>
+<li><p>Generar una documentación completa de la API del proxy utilizando Swagger o OpenAPI.</p></li>
+</ul>
+</section>
+<section id="requisitos-adicionales-opcionales" class="level2">
+<h2 class="anchored" data-anchor-id="requisitos-adicionales-opcionales">Requisitos Adicionales (Opcionales)</h2>
+<ul>
+<li><p><strong>Compresión de respuestas:</strong> Implementar la compresión de las respuestas para reducir el tamaño de los datos transmitidos.</p></li>
+<li><p><strong>Seguridad:</strong> Implementar medidas de seguridad adicionales, como el cifrado de las comunicaciones y la protección contra ataques comunes.</p></li>
+<li><p><strong>Monitoreo:</strong> Implementar un sistema de monitoreo para rastrear el rendimiento del proxy y detectar problemas.</p></li>
+</ul>
+</section>
+<section id="tecnologías-sugeridas" class="level2">
+<h2 class="anchored" data-anchor-id="tecnologías-sugeridas">Tecnologías Sugeridas</h2>
+<ul>
+<li><p><strong>.NET Core:</strong> Framework para el desarrollo del proxy.</p></li>
+<li><p><strong>HttpClient:</strong> Para realizar las solicitudes a la API de Hacienda.</p></li>
+<li><p><strong>Redis:</strong> Para implementar el cacheo.</p></li>
+<li><p><strong>Swagger/OpenAPI:</strong> Para generar la documentación de la API del proxy.</p></li>
+</ul>
+</section>
+<section id="entrega" class="level2">
+<h2 class="anchored" data-anchor-id="entrega">Entrega</h2>
+<ul>
+<li><p>Código fuente del proyecto.</p></li>
+<li><p>Documentación de la API del proxy en formato Swagger o OpenAPI.</p></li>
+<li><p>Un informe que describa la arquitectura del proxy, las decisiones de diseño y los desafíos enfrentados.</p></li>
+<li><p>Diagrama de la arquitectura, mostrando los componentes principales: proxy, servicios externos, base de datos (opcional).</p></li>
+</ul>
+</section>
+<section id="evaluación" class="level2">
+<h2 class="anchored" data-anchor-id="evaluación">Evaluación</h2>
+<ul>
+<li><p>Corrección de la implementación del proxy.</p></li>
+<li><p>Eficiencia del cacheo y el manejo de errores.</p></li>
+<li><p>Seguridad de la implementación.</p></li>
+<li><p>Calidad del código y la documentación.</p></li>
+</ul>
+</section>
+<section id="consideraciones-adicionales" class="level2">
+<h2 class="anchored" data-anchor-id="consideraciones-adicionales">Consideraciones Adicionales</h2>
+<ul>
+<li><p><strong>Documentación de la API de Hacienda:</strong> Es fundamental que los estudiantes consulten la documentación oficial de la API de Hacienda para entender los endpoints disponibles, los formatos de datos y los requisitos de autenticación.</p></li>
+<li><p><strong>Performance:</strong> Se debe prestar atención al rendimiento del proxy, especialmente en términos de tiempo de respuesta y uso de recursos.</p></li>
+<li><p><strong>Escalabilidad:</strong> El proxy debe ser diseñado para poder escalar horizontalmente si es necesario.</p></li>
+</ul>
+</section>
+<section id="referencias" class="level2">
+<h2 class="anchored" data-anchor-id="referencias">Referencias</h2>
+<ul>
+<li><p><a href="https://paper.dropbox.com/doc/API-Ministerio-de-Hacienda-znrOU6bGjTHcXjo8oUmBj">API Ministerio de Hacienda</a>.</p></li>
+<li><p><a href="https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca">Hecho en Costa Rica: Hacienda CLI</a>.</p></li>
+</ul>
+<p><strong>Al finalizar este proyecto, los estudiantes habrán adquirido habilidades prácticas en el desarrollo de proxies, la integración con APIs externas y la aplicación de los conceptos aprendidos en el curso.</strong></p>
+</section>
+</section>
+<section id="propuesta-de-proyecto-b-api-para-factura-electrónica" class="level1">
+<h1>Propuesta de proyecto B: API para Factura Electrónica</h1>
+<section id="objetivo-1" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo-1">Objetivo</h2>
+<p>Desarrollar una API RESTful utilizando ASP.NET Core para gestionar la emisión de facturas electrónicas. Esta API permitirá a las empresas generar, consultar y cancelar facturas electrónicas de acuerdo con los estándares establecidos por el Ministerio de Hacienda de Costa Rica. El proyecto permitirá a los estudiantes aplicar los conocimientos adquiridos en el curso para construir una solución que automatice y optimice los procesos de facturación electrónica.</p>
+</section>
+<section id="requisitos-mínimos-1" class="level2">
+<h2 class="anchored" data-anchor-id="requisitos-mínimos-1">Requisitos Mínimos</h2>
+<ul>
+<li><p><strong>Modelos de datos:</strong> Definir modelos para representar facturas (número, fecha de emisión, cliente, productos, impuestos), clientes, productos y otros elementos relevantes.</p></li>
+<li><p><strong>Endpoints:</strong> Implementar endpoints RESTful para las siguientes operaciones:</p>
+<ul>
+<li><strong>Facturas:</strong> Crear, leer, actualizar, cancelar facturas.</li>
+<li><strong>Clientes:</strong> Crear, leer, actualizar, eliminar clientes.</li>
+<li><strong>Productos:</strong> Crear, leer, actualizar, eliminar productos.</li>
+<li><strong>Generación de XML:</strong> Generar el archivo XML de la factura con el formato requerido por el Ministerio de Hacienda.</li>
+<li><strong>Firma digital:</strong> Implementar la firma digital de la factura utilizando un certificado digital.</li>
+<li><strong>Envío al Ministerio de Hacienda:</strong> Enviar la factura firmada al sistema del Ministerio de Hacienda.</li>
+</ul></li>
+<li><p><strong>Validación de datos:</strong> Implementar una rigurosa validación de los datos de entrada para asegurar la integridad de las facturas.</p></li>
+<li><p><strong>Manejo de errores:</strong> Implementar un mecanismo de manejo de errores personalizado para devolver mensajes de error claros y concisos.</p></li>
+<li><p><strong>Documentación:</strong> Generar documentación de la API utilizando herramientas como Swagger o OpenAPI.</p></li>
+</ul>
+</section>
+<section id="temas-a-abordar-1" class="level2">
+<h2 class="anchored" data-anchor-id="temas-a-abordar-1">Temas a Abordar</h2>
+<ul>
+<li>Aplicar los conceptos básicos de HTTP y desarrollo de APIs web para diseñar la arquitectura de la API.</li>
+<li>Utilizar los principios de REST para diseñar los endpoints y las respuestas de la API.</li>
+<li>Utilizar JSON para representar los datos y definir los formatos de respuesta.</li>
+<li>Implementar middleware para tareas como la validación de datos, la autenticación, la autorización y el manejo de excepciones.</li>
+<li>Diseñar una estructura de URL clara y consistente para los endpoints.</li>
+<li>Generar una documentación completa de la API utilizando Swagger o OpenAPI.</li>
+<li>Implementar un mecanismo de autenticación para proteger el acceso a la API.</li>
+</ul>
+</section>
+<section id="requisitos-adicionales-opcionales-1" class="level2">
+<h2 class="anchored" data-anchor-id="requisitos-adicionales-opcionales-1">Requisitos Adicionales (Opcionales)</h2>
+<ul>
+<li><p><strong>Generación de reportes:</strong> Generar reportes de ventas y otros informes a partir de los datos de las facturas.</p></li>
+<li><p><strong>Notificaciones:</strong> Enviar notificaciones por correo electrónico o SMS cuando se emiten o cancelan facturas.</p></li>
+</ul>
+</section>
+<section id="tecnologías-sugeridas-1" class="level2">
+<h2 class="anchored" data-anchor-id="tecnologías-sugeridas-1">Tecnologías Sugeridas</h2>
+<ul>
+<li><p><strong>.NET Core:</strong> Framework para el desarrollo de aplicaciones web.</p></li>
+<li><p><strong>Entity Framework Core:</strong> ORM para interactuar con la base de datos.</p></li>
+<li><p><strong>Swagger/OpenAPI:</strong> Para generar la documentación de la API.</p></li>
+<li><p><strong>Librería de firma digital:</strong> Para firmar los archivos XML de las facturas.</p></li>
+<li><p><strong>Biblioteca para consumir la API del Ministerio de Hacienda:</strong> Para enviar las facturas al sistema del Ministerio.</p></li>
+</ul>
+</section>
+<section id="entrega-1" class="level2">
+<h2 class="anchored" data-anchor-id="entrega-1">Entrega</h2>
+<ul>
+<li><p>Código fuente del proyecto.</p></li>
+<li><p>Documentación de la API en formato Swagger o OpenAPI.</p></li>
+<li><p>Un documento explicativo que describa las decisiones de diseño y las tecnologías utilizadas.</p></li>
+<li><p>Diagrama de la arquitectura, mostrando los componentes principales: api, servicios externos, base de datos (opcional).</p></li>
+</ul>
+</section>
+<section id="evaluación-1" class="level2">
+<h2 class="anchored" data-anchor-id="evaluación-1">Evaluación</h2>
+<ul>
+<li><p>Corrección de la implementación de los endpoints.</p></li>
+<li><p>Calidad del código (legibilidad, mantenibilidad).</p></li>
+<li><p>Completitud de la documentación.</p></li>
+<li><p>Cumplimiento de los requisitos adicionales.</p></li>
+<li><p>Cumplimiento de los estándares de facturación electrónica del Ministerio de Hacienda.</p></li>
+</ul>
+</section>
+<section id="consideraciones-adicionales-1" class="level2">
+<h2 class="anchored" data-anchor-id="consideraciones-adicionales-1">Consideraciones Adicionales</h2>
+<ul>
+<li><p><strong>Legislación:</strong> Es fundamental que los estudiantes se aseguren de cumplir con toda la legislación vigente en materia de facturación electrónica.</p></li>
+<li><p><strong>Seguridad:</strong> Se deben implementar medidas de seguridad robustas para proteger la información confidencial de los clientes y de la empresa.</p></li>
+<li><p><strong>Performance:</strong> La API debe ser eficiente y capaz de manejar un gran volumen de transacciones.</p></li>
+</ul>
+</section>
+<section id="referencias-1" class="level2">
+<h2 class="anchored" data-anchor-id="referencias-1">Referencias</h2>
+<ul>
+<li><p><a href="https://github.com/CRLibre/API_Hacienda">API libre para Factura Electrónica en Costa Rica</a>.</p></li>
+<li><p><a href="https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca">Hecho en Costa Rica: Hacienda CLI</a>.</p></li>
+<li><p><a href="https://raw.githubusercontent.com/CRLibre/docs-fe-hacienda-cr/master/diagrama-flujo/Diagrama%20de%20Flujo%20para%20Factura%20Electronica%20Costa%20Rica.png">Diagrama de flujo Factura Electrónica Costa Rica</a>.</p></li>
+</ul>
+<p><strong>Al finalizar este proyecto, los estudiantes habrán adquirido una sólida base en el desarrollo de APIs RESTful para aplicaciones empresariales y estarán preparados para abordar proyectos más complejos en el ámbito de la facturación electrónica.</strong></p>
+</section>
+</section>
+<section id="propuesta-de-proyecto-c-firmador-electrónico" class="level1">
+<h1>Propuesta de proyecto C: Firmador Electrónico</h1>
+<section id="objetivo-del-proyecto" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo-del-proyecto">Objetivo del Proyecto</h2>
+<p>Desarrollar una aplicación que permita firmar digitalmente documentos electrónicos de forma segura y confiable. El firmador electrónico garantizará la autenticidad, integridad y no repudio de los documentos firmados.</p>
+</section>
+<section id="lo-que-aprenderán-los-estudiantes" class="level2">
+<h2 class="anchored" data-anchor-id="lo-que-aprenderán-los-estudiantes">Lo que aprenderán los estudiantes</h2>
+<ul>
+<li><p><strong>Criptografía:</strong> Algoritmos de firma digital (RSA, DSA), generación de claves, certificados digitales.</p></li>
+<li><p><strong>Seguridad de la información:</strong> Protección de claves privadas, prevención de ataques.</p></li>
+<li><p><strong>Desarrollo de aplicaciones:</strong> Creación de interfaces de usuario intuitivas, manejo de archivos.</p></li>
+<li><p><strong>Legislación:</strong> Normativa relacionada con la firma electrónica.</p></li>
+</ul>
+</section>
+<section id="criterios-de-aceptación" class="level2">
+<h2 class="anchored" data-anchor-id="criterios-de-aceptación">Criterios de Aceptación</h2>
+<ul>
+<li><strong>Funcionalidad:</strong>
+<ul>
+<li>Firmar digitalmente diferentes tipos de archivos (XML, etc.).</li>
+<li>Verificar la integridad de una firma digital.</li>
+<li>Generar certificados digitales (opcional).</li>
+</ul></li>
+<li><strong>Seguridad:</strong>
+<ul>
+<li>Almacenar las claves privadas de forma segura.</li>
+<li>Proteger contra ataques como la falsificación de firmas.</li>
+<li>Cumplir con los estándares de firma digital.</li>
+</ul></li>
+<li><strong>Usabilidad:</strong>
+<ul>
+<li>Interfaz de usuario intuitiva y fácil de usar.</li>
+</ul></li>
+<li><strong>Integración:</strong>
+<ul>
+<li>Posibilidad de integrarse con otros sistemas (opcional).</li>
+</ul></li>
+</ul>
+</section>
+<section id="descripción-detallada" class="level2">
+<h2 class="anchored" data-anchor-id="descripción-detallada">Descripción Detallada</h2>
+<p>El firmador electrónico se construirá utilizando ASP .NET Core y se desplegará en un ambiente local (no es necesario hostearlo en una nube).</p>
+</section>
+<section id="retos-y-consideraciones" class="level2">
+<h2 class="anchored" data-anchor-id="retos-y-consideraciones">Retos y consideraciones</h2>
+<ul>
+<li><p><strong>Seguridad:</strong> La seguridad de las claves privadas es fundamental.</p></li>
+<li><p><strong>Legislación:</strong> Es necesario cumplir con la legislación vigente en materia de firma electrónica.</p></li>
+<li><p><strong>Interoperabilidad:</strong> El firmador debe ser compatible con diferentes formatos de archivo y sistemas operativos.</p></li>
+</ul>
+</section>
+<section id="temas-a-abordar-2" class="level2">
+<h2 class="anchored" data-anchor-id="temas-a-abordar-2">Temas a Abordar</h2>
+<ul>
+<li><p>Aplicar los conceptos básicos de HTTP para entender la comunicación entre el cliente y el servidor.</p></li>
+<li><p>Utilizar los principios de REST para diseñar una API que permita firmar documentos de forma remota (opcional).</p></li>
+<li><p>Utilizar JSON para representar los datos de la firma y los metadatos del documento.</p></li>
+<li><p>Implementar middleware para manejar la autenticación, la autorización y el manejo de excepciones.</p></li>
+<li><p>Diseñar una estructura de URL clara y consistente para los endpoints de la API (opcional).</p></li>
+<li><p>Generar una documentación completa de la API utilizando Swagger o OpenAPI (opcional).</p></li>
+<li><p>Implementar un mecanismo de autenticación robusto para proteger el acceso a las funcionalidades de firma.</p></li>
+<li><p>Realizar pruebas exhaustivas para garantizar la seguridad y la funcionalidad del firmador.</p></li>
+</ul>
+</section>
+<section id="aspectos-adicionales-a-considerar" class="level2">
+<h2 class="anchored" data-anchor-id="aspectos-adicionales-a-considerar">Aspectos adicionales a considerar</h2>
+<ul>
+<li><p><strong>Tipos de firma:</strong> Firma simple, firma cualificada, firma avanzada.</p></li>
+<li><p><strong>Integración con sistemas de gestión documental:</strong> Para automatizar procesos de firma.</p></li>
+<li><p><strong>Firma remota:</strong> Permitir la firma de documentos de forma remota.</p></li>
+</ul>
+</section>
+<section id="entrega-2" class="level2">
+<h2 class="anchored" data-anchor-id="entrega-2">Entrega</h2>
+<ul>
+<li><p>Código fuente del proyecto.</p></li>
+<li><p>Documentación de la API en formato Swagger o OpenAPI.</p></li>
+<li><p>Un documento explicativo que describa las decisiones de diseño y las tecnologías utilizadas.</p></li>
+<li><p>Diagrama de la arquitectura, mostrando los componentes principales: interfaz de usuario, motor de firma, almacenamiento de claves, etc.</p></li>
+</ul>
+</section>
+<section id="referencias-2" class="level2">
+<h2 class="anchored" data-anchor-id="referencias-2">Referencias</h2>
+<ul>
+<li><p><a href="https://github.com/CRLibre/API_Hacienda">API libre para Factura Electrónica en Costa Rica</a>.</p></li>
+<li><p><a href="https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca">Hecho en Costa Rica: Hacienda CLI</a>.</p></li>
+<li><p><a href="https://raw.githubusercontent.com/CRLibre/docs-fe-hacienda-cr/master/diagrama-flujo/Diagrama%20de%20Flujo%20para%20Factura%20Electronica%20Costa%20Rica.png">Diagrama de flujo Factura Electrónica Costa Rica</a>.</p></li>
+<li><p><a href="https://github.com/johann04/xades-signer-cr">xades-signer-cr</a>.</p></li>
+</ul>
+<p><strong>Al finalizar este proyecto, los estudiantes habrán adquirido una sólida base en el desarrollo de APIs RESTful para aplicaciones empresariales y estarán preparados para abordar proyectos más complejos en el ámbito de la facturación electrónica.</strong></p>
+</section>
+</section>
+<section id="propuesta-de-proyecto-c-reverse-proxy-de-otras-apis" class="level1">
+<h1>Propuesta de proyecto C: Reverse Proxy de Otras APIs</h1>
+<section id="objetivo-del-proyecto-1" class="level2">
+<h2 class="anchored" data-anchor-id="objetivo-del-proyecto-1">Objetivo del Proyecto</h2>
+<p>Desarrollar un reverse proxy utilizando ASP.NET Core que actúe como intermediario entre una aplicación cliente y múltiples APIs externas. Este proyecto permitirá a los estudiantes aplicar los conocimientos adquiridos en el curso para construir una solución que consolide y unifique el acceso a diferentes servicios web, mejorando la experiencia del usuario y la mantenibilidad de las aplicaciones.</p>
+</section>
+<section id="lo-que-aprenderán-los-estudiantes-1" class="level2">
+<h2 class="anchored" data-anchor-id="lo-que-aprenderán-los-estudiantes-1">Lo que aprenderán los estudiantes</h2>
+<ul>
+<li><p><strong>Arquitectura de microservicios:</strong> Cómo un proxy puede servir como puerta de entrada a múltiples servicios.</p></li>
+<li><p><strong>Manejo de solicitudes HTTP:</strong> Enrutamiento, transformación y composición de solicitudes.</p></li>
+<li><p><strong>Caching:</strong> Optimización del rendimiento a través del almacenamiento en caché de respuestas.</p></li>
+<li><p><strong>Resiliencia:</strong> Manejo de errores, timeouts y reintentos.</p></li>
+<li><p><strong>Seguridad:</strong> Autenticación, autorización y protección contra ataques comunes.</p></li>
+</ul>
+</section>
+<section id="criterios-de-aceptación-1" class="level2">
+<h2 class="anchored" data-anchor-id="criterios-de-aceptación-1">Criterios de Aceptación</h2>
+<ul>
+<li><strong>Funcionalidad:</strong>
+<ul>
+<li>Enrutar solicitudes a diferentes APIs basadas en la ruta de la URL.</li>
+<li>Agregar encabezados y parámetros de consulta a las solicitudes.</li>
+<li>Combinar datos de múltiples APIs en una sola respuesta.</li>
+</ul></li>
+<li><strong>Performance:</strong>
+<ul>
+<li>Implementar un mecanismo de caching para mejorar la velocidad de respuesta.</li>
+<li>Manejar grandes volúmenes de tráfico.</li>
+</ul></li>
+<li><strong>Seguridad:</strong>
+<ul>
+<li>Proteger contra ataques como inyección SQL, XSS y CSRF.</li>
+<li>Implementar autenticación y autorización para acceder a las APIs.</li>
+</ul></li>
+<li><strong>Escalabilidad:</strong>
+<ul>
+<li>Diseñar el proxy para que pueda escalar horizontalmente.</li>
+</ul></li>
+</ul>
+</section>
+<section id="descripción-detallada-1" class="level2">
+<h2 class="anchored" data-anchor-id="descripción-detallada-1">Descripción Detallada</h2>
+<p>El reverse proxy se construirá utilizando ASP.NET Core y se desplegará en un ambiente local (no es necesario hostearlo en una nube).</p>
+</section>
+<section id="tecnologías-sugeridas-2" class="level2">
+<h2 class="anchored" data-anchor-id="tecnologías-sugeridas-2">Tecnologías sugeridas</h2>
+<ul>
+<li><p><strong>.NET Core:</strong> Framework para el desarrollo del proxy.</p></li>
+<li><p><strong>HttpClient:</strong> Para realizar las solicitudes a las APIs externas.</p></li>
+<li><p><strong>Redis:</strong> Para implementar el caching (opcional).</p></li>
+<li><p><strong>Swagger/OpenAPI:</strong> Para generar la documentación de la API del proxy (opcional).</p></li>
+</ul>
+</section>
+<section id="temas-a-abordar-3" class="level2">
+<h2 class="anchored" data-anchor-id="temas-a-abordar-3">Temas a Abordar</h2>
+<ul>
+<li><p>Aplicar los conceptos básicos de HTTP para entender el funcionamiento del proxy.</p></li>
+<li><p>Utilizar los principios de REST para diseñar los endpoints del proxy y las interacciones con las APIs externas.</p></li>
+<li><p>Utilizar JSON para representar las respuestas de las APIs y para almacenar los datos en caché.</p></li>
+<li><p>Implementar middleware para manejar la autenticación, el cacheo y el manejo de errores.</p></li>
+<li><p>Diseñar una estructura de URL clara y consistente para los endpoints del proxy.</p></li>
+<li><p>Generar una documentación completa de la API del proxy utilizando Swagger o OpenAPI.</p></li>
+<li><p>Considerar el uso de Docker para contenerizar el proxy y facilitar su despliegue.</p></li>
+</ul>
+</section>
+<section id="aspectos-adicionales-a-considerar-1" class="level2">
+<h2 class="anchored" data-anchor-id="aspectos-adicionales-a-considerar-1">Aspectos adicionales a considerar</h2>
+<ul>
+<li><p><strong>Seguridad:</strong> Implementar medidas de seguridad adicionales, como el cifrado de las comunicaciones y la protección contra ataques comunes.</p></li>
+<li><p><strong>Monitoreo:</strong> Implementar un sistema de monitoreo para rastrear el rendimiento del proxy y detectar problemas.</p></li>
+</ul>
+</section>
+<section id="referencias-3" class="level2">
+<h2 class="anchored" data-anchor-id="referencias-3">Referencias</h2>
+<ul>
+<li><p><a href="https://auth0.com/blog/building-a-reverse-proxy-in-dot-net-core/">Building a Reverse Proxy in .NET Core</a>.</p></li>
+<li><p><a href="https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca">Hecho en Costa Rica: Hacienda CLI</a>.</p></li>
+<li><p><a href="https://dev.to/asimmon/how-to-securely-reverse-proxy-aspnet-core-web-apps-3h4c">How to securely reverse-proxy ASP.NET Core web apps</a>.</p></li>
+</ul>
+<p><strong>Al finalizar este proyecto, los estudiantes habrán adquirido habilidades prácticas en el desarrollo de proxies, la integración con APIs externas y la aplicación de los conceptos aprendidos en el curso.</strong></p>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copiado");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copiado");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

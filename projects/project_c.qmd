@@ -1,0 +1,95 @@
+# Propuesta de proyecto C: Firmador Electrónico
+
+## Objetivo del Proyecto
+
+Desarrollar una aplicación que permita firmar digitalmente documentos electrónicos de forma segura y confiable. El firmador electrónico garantizará la autenticidad, integridad y no repudio de los documentos firmados.
+
+## Lo que aprenderán los estudiantes
+
+* **Criptografía:** Algoritmos de firma digital (RSA, DSA), generación de claves, certificados digitales.
+
+* **Seguridad de la información:** Protección de claves privadas, prevención de ataques.
+
+* **Desarrollo de aplicaciones:** Creación de interfaces de usuario intuitivas, manejo de archivos.
+
+* **Legislación:** Normativa relacionada con la firma electrónica.
+
+## Criterios de Aceptación
+
+* **Funcionalidad:**
+    * Firmar digitalmente diferentes tipos de archivos (XML, etc.).
+    * Verificar la integridad de una firma digital.
+    * Generar certificados digitales (opcional).
+
+* **Seguridad:**
+    * Almacenar las claves privadas de forma segura.
+    * Proteger contra ataques como la falsificación de firmas.
+    * Cumplir con los estándares de firma digital.
+
+* **Usabilidad:**
+    * Interfaz de usuario intuitiva y fácil de usar.
+
+* **Integración:**
+    * Posibilidad de integrarse con otros sistemas (opcional).
+
+## Descripción Detallada
+
+El firmador electrónico se construirá utilizando ASP .NET Core y se desplegará en un ambiente local (no es necesario hostearlo en una nube).
+
+## Retos y consideraciones
+
+* **Seguridad:** La seguridad de las claves privadas es fundamental.
+
+* **Legislación:** Es necesario cumplir con la legislación vigente en materia de firma electrónica.
+
+* **Interoperabilidad:** El firmador debe ser compatible con diferentes formatos de archivo y sistemas operativos.
+
+
+
+## Temas a Abordar
+
+* Aplicar los conceptos básicos de HTTP para entender la comunicación entre el cliente y el servidor.
+
+* Utilizar los principios de REST para diseñar una API que permita firmar documentos de forma remota (opcional).
+
+* Utilizar JSON para representar los datos de la firma y los metadatos del documento.
+
+* Implementar middleware para manejar la autenticación, la autorización y el manejo de excepciones.
+
+* Diseñar una estructura de URL clara y consistente para los endpoints de la API (opcional).
+
+* Generar una documentación completa de la API utilizando Swagger o OpenAPI (opcional).
+
+* Implementar un mecanismo de autenticación robusto para proteger el acceso a las funcionalidades de firma.
+
+* Realizar pruebas exhaustivas para garantizar la seguridad y la funcionalidad del firmador.
+
+## Aspectos adicionales a considerar
+
+* **Tipos de firma:** Firma simple, firma cualificada, firma avanzada.
+
+* **Integración con sistemas de gestión documental:** Para automatizar procesos de firma.
+
+* **Firma remota:** Permitir la firma de documentos de forma remota.
+
+## Entrega
+
+* Código fuente del proyecto.
+
+* Documentación de la API en formato Swagger o OpenAPI.
+
+* Un documento explicativo que describa las decisiones de diseño y las tecnologías utilizadas.
+
+* Diagrama de la arquitectura, mostrando los componentes principales: interfaz de usuario, motor de firma, almacenamiento de claves, etc.
+
+## Referencias
+
+* [API libre para Factura Electrónica en Costa Rica](https://github.com/CRLibre/API_Hacienda).
+
+* [Hecho en Costa Rica: Hacienda CLI](https://medium.com/@kevinah95/hecho-en-costa-rica-hacienda-cli-d922490d6aca).
+
+* [Diagrama de flujo Factura Electrónica Costa Rica](https://raw.githubusercontent.com/CRLibre/docs-fe-hacienda-cr/master/diagrama-flujo/Diagrama%20de%20Flujo%20para%20Factura%20Electronica%20Costa%20Rica.png).
+
+* [xades-signer-cr](https://github.com/johann04/xades-signer-cr).
+
+**Al finalizar este proyecto, los estudiantes habrán adquirido una sólida base en el desarrollo de APIs RESTful para aplicaciones empresariales y estarán preparados para abordar proyectos más complejos en el ámbito de la facturación electrónica.**
