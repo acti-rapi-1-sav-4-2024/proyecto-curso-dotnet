@@ -6,11 +6,11 @@ manuscript:
 
 format:
   html:
+    other-links: 
+      - text: GitHub Repo
+        href: https://github.com/acti-rapi-1-sav-4-2024/proyecto-curso-dotnet
     comments:
       hypothesis: true
-  docx: default
-  jats: default
-  #pdf: default
   agu-pdf: default
     #keep-tex: true
 
