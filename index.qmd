@@ -12,8 +12,6 @@ authors:
         state: San Pedro
         country: Costa Rica
         url: https://ucenfotec.ac.cr
-
-bibliography: references.bib
 ---
 
 # Introducción
@@ -47,5 +45,3 @@ A continuación, se presentan varias propuestas de proyectos para que el estudia
 
 {{< include projects/project_d.qmd >}}
 
-
-This is a simple placeholder for the manuscript's main document [@knuth84].
